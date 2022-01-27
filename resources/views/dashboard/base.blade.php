@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Icons-->
     <link href="{{ asset('css/free.min.css') }}" rel="stylesheet"> <!-- icons -->
-    <link href="{{ asset('css/flag-icon.min.css') }}" rel="stylesheet"> <!-- icons -->
+    <link href="{{ asset('css/flag.min.css') }}" rel="stylesheet"> <!-- icons -->
     <!-- Main styles for this application-->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
@@ -64,20 +64,19 @@
 
   <body class="c-app">
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
-
       @include('dashboard.shared.nav-builder')
+    </div>
+    <div class="c-wrapper">
 
       @include('dashboard.shared.header')
 
       <div class="c-body">
-
         <main class="c-main">
-
-          @yield('content') 
-
+          @yield('content')
         </main>
         @include('dashboard.shared.footer')
       </div>
+
     </div>
 
 
