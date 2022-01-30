@@ -90,6 +90,16 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
+        'filemaker' => [
+            'driver' => 'filemaker',
+            'host' => env('FM_HOST', 'localhost'),
+            'database' => env('FM_DATABASE', 'forge'),
+            'username' => env('FM_USERNAME', 'forge'),
+            'password' => env('FM_PASSWORD', ''),
+            'prefix' => '',
+            'version' => env('DB_VERSION', 'vLatest'),
+            'protocol' => env('DB_PROTOCOL', 'https'),
+        ]
 
     ],
 
