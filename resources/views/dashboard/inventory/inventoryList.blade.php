@@ -1,5 +1,8 @@
 @extends('dashboard.base')
+@php
 
+
+@endphp
 @section('content')
 
         <div class="container-fluid">
@@ -8,11 +11,12 @@
               <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
                 <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i>{{ __('Users') }}</div>
+                      <i class="fa fa-align-justify"></i>{{ __('Inventory') }}</div>
                     <div class="card-body">
                         <table class="table table-responsive-sm table-striped">
                         <thead>
                           <tr>
+                            <th></th>
                             <th>Name</th>
                             <th>Part Number</th>
                             <th>Units On Hand</th>
@@ -25,31 +29,24 @@
                         <tbody>
                           @foreach($products as $product)
                             <tr>
+                              <td><img src="{{$product->Image  }}" ></td>
                               <td>{{ $product->Name }}</td>
                               <td>{{ $product->PartNumber }}</td>
                               <td>{{ $product->UnitsOnHand }}</td>
+                              <td>{{ $product->Availability }}</td>
                               <td>
-                                @if ($product->UnitsOnHand == 0)
-                                    Not in stock — order more
-                                @elseif ($product->UnitsOnHand <= $product->ReorderLevel)
-                                    Stock is low — order more
-                                @else
-                                    In stock
-                                @endif
+                                <a href="{{ url('/users/' . $product->id) }}" class="btn btn-block btn-primary">View</a>
                               </td>
                               <td>
-                                <a href="{{ url('/users/' . $product->BarCode) }}" class="btn btn-block btn-primary">View</a>
-                              </td>
-                              <td>
-                                <a href="{{ url('/users/' . $product->BarCode . '/edit') }}" class="btn btn-block btn-primary">Edit</a>
+                                <a href="{{ url('/users/' . $product->id . '/edit') }}" class="btn btn-block btn-primary">Edit</a>
                               </td>
                               <td>
                                 @if( $you->id !== $product->BarCode )
-                                <form action="{{ route('users.destroy', $product->BarCode ) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-block btn-danger">Delete Record</button>
-                                </form>
+{{--                                <form action="{{ route('inventory.destroy', $product->BarCode ) }}" method="POST">--}}
+{{--                                    @method('DELETE')--}}
+{{--                                    @csrf--}}
+{{--                                    <button class="btn btn-block btn-danger">Delete Record</button>--}}
+{{--                                </form>--}}
                                 @endif
                               </td>
                             </tr>

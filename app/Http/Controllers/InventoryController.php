@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -27,10 +28,9 @@ class InventoryController extends Controller
      */
     public function index()
     {
-//        dd(Product::all());
         $you = auth()->user();
-        $products = Product::all();
-        return view('dashboard.admin.inventoryList', compact('products', 'you'));
+        $products = Inventory::all();
+        return view('dashboard.inventory.inventoryList', compact('products', 'you'));
     }
 
     /**
