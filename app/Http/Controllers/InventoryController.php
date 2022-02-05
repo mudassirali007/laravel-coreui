@@ -28,8 +28,10 @@ class InventoryController extends Controller
      */
     public function index()
     {
+
         $you = auth()->user();
         $products = Inventory::all();
+//        dd($products);
         return view('dashboard.inventory.inventoryList', compact('products', 'you'));
     }
 
