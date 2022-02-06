@@ -6,12 +6,23 @@
 
         <div class="container-fluid">
           <div class="animated fadeIn">
+
             <div class="row">
               <div class="col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                      <i class="fa fa-align-justify"></i>{{ __('Inventory') }}</div>
+                      <i class="fa fa-align-justify"></i>{{ __('Inventory List') }}</div>
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <a
+                                        href="{{ route('inventory.create') }}"
+                                        class="btn btn-primary mb-3"
+                                >
+                                    Add new Product
+                                </a>
+                            </div>
+                        </div>
                         <table class="table table-responsive-sm table-striped">
                         <thead>
                           <tr>

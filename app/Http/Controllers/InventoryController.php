@@ -36,6 +36,23 @@ class InventoryController extends Controller
         return view('dashboard.inventory.inventoryList', compact('products', 'you'));
     }
 
+    public function create()
+    {
+        return view('dashboard.inventory.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'model'       => 'required|min:1|max:128',
+            'marker'      => 'required'
+        ]);
+
+        return redirect()->route('inventory.index');
+
+    }
+
+
     /**
      * Display the specified resource.
      *
