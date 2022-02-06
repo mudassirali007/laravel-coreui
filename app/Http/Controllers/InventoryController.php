@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Inventory;
+use App\Models\InventoryDetail;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -43,8 +44,9 @@ class InventoryController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('dashboard.admin.userShow', compact( 'user' ));
+        $product = InventoryDetail::find($id);
+//        dd($product);
+        return view('dashboard.inventory.inventoryShow', compact( 'product' ));
     }
 
     /**
@@ -88,10 +90,11 @@ class InventoryController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        if($user){
-            $user->delete();
+        $product = Inventory::find($id);
+
+        if($product){
+            $product->delete();
         }
-        return redirect()->route('users.index');
+        return redirect()->route('inventory.index');
     }
 }
