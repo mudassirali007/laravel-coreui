@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="col-6">
 {{--                                    <img src="{{$product->Image  }}" >--}}
-                                    <img src="<?php echo e(url('/assets/img/avatars/6.jpg')); ?>" >
+                                    <img src="<?php echo e(url('/assets/img/avatars/9.jpg')); ?>" >
                                 </div>
                             </div>
                         </div>

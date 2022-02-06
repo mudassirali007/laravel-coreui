@@ -15,7 +15,7 @@
                         <table class="table table-responsive-sm table-striped">
                         <thead>
                           <tr>
-                            <th></th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Part Number</th>
                             <th>Units On Hand</th>
@@ -30,7 +30,7 @@
                             <tr>
                               <td>
 {{--                                  <img src="{{$product->Image  }}" >--}}
-                                  <img src="<?php echo e(url('/assets/img/avatars/6.jpg')); ?>" >
+                                  <img src="<?php echo e(url('/assets/img/avatars/9.jpg')); ?>" >
                               </td>
                               <td>{{ $product->Name }}</td>
                               <td>{{ $product->PartNumber }}</td>
