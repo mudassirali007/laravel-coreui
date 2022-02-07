@@ -40,8 +40,7 @@
                           @foreach($products as $product)
                             <tr>
                               <td>
-{{--                                  <img src="{{$product->Image  }}" >--}}
-                                  <img src="<?php echo e(url('/assets/img/avatars/9.jpg')); ?>" >
+                                  <img width="50vw" src="{{ $product->Image  }}" />
                               </td>
                               <td>{{ $product->Name }}</td>
                               <td>{{ $product->PartNumber }}</td>

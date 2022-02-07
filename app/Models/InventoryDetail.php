@@ -11,4 +11,23 @@ class InventoryDetail extends FMModel
     protected $layout = "Product Details";
     protected $primaryKey = 'ProductID';
 
+    protected $fillable = [
+        'Description',
+        'Manufacturer',
+        'Location',
+        'Date',
+        'ModelYear',
+        'BarCode',
+        'PartNumber',
+        'StockValue',
+        'UnitsOnHand',
+        'Taxable',
+        'UnitPrice',
+        'UnitCost',
+        'ReorderLevel',
+        'Category',
+        'Name',
+        'Image'
+    ];
+
 }

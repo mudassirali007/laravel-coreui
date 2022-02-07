@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 @endif 
-                <form method="POST" action="{{ route('bread.update', $form->id) }}">           
+                <form method="POST" action="{{ route('bread.update', $form->id) }}">
                     <div class="row">
                         <div class="col-6">
                             @csrf

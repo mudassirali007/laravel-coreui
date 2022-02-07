@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Inventory;
 use App\Models\InventoryDetail;
 use Illuminate\Http\Request;
@@ -43,10 +42,26 @@ class InventoryController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'model'       => 'required|min:1|max:128',
-            'marker'      => 'required'
-        ]);
+//        dd($request->Date);
+        $product = new InventoryDetail();
+        $product->Name = $request->Name;
+        $product->Description = $request->Description;
+        $product->Manufacturer = $request->Manufacturer;
+        $product->Location = $request->Location;
+
+        $product->ModelYear = $request->ModelYear;
+        $product->BarCode = $request->BarCode;
+        $product->PartNumber = $request->PartNumber;
+//        $product->StockValue = $request->StockValue;
+//        $product->UnitsOnHand = $request->UnitsOnHand;
+        $product->Taxable = $request->Taxable;
+        $product->UnitPrice = $request->UnitPrice;
+        $product->UnitCost = $request->UnitCost;
+        $product->ReorderLevel = $request->ReorderLevel;
+        $product->Category = $request->Category;
+
+        $product->save();
+//        InventoryDetail::create($request->all());
 
         return redirect()->route('inventory.index');
 
@@ -74,8 +89,8 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('dashboard.admin.userEditForm', compact('user'));
+        $product = InventoryDetail::find($id);
+        return view('dashboard.inventory.edit', compact('product'));
     }
 
     /**
@@ -87,16 +102,26 @@ class InventoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'name'       => 'required|min:1|max:256',
-            'email'      => 'required|email|max:256'
-        ]);
-        $user = User::find($id);
-        $user->name       = $request->input('name');
-        $user->email      = $request->input('email');
-        $user->save();
+        $product = InventoryDetail::find($id);
+        $product->Name = $request->Name;
+        $product->Description = $request->Description;
+        $product->Manufacturer = $request->Manufacturer;
+        $product->Location = $request->Location;
+
+        $product->ModelYear = $request->ModelYear;
+        $product->BarCode = $request->BarCode;
+        $product->PartNumber = $request->PartNumber;
+//        $product->StockValue = $request->StockValue;
+//        $product->UnitsOnHand = $request->UnitsOnHand;
+        $product->Taxable = $request->Taxable;
+        $product->UnitPrice = $request->UnitPrice;
+        $product->UnitCost = $request->UnitCost;
+        $product->ReorderLevel = $request->ReorderLevel;
+        $product->Category = $request->Category;
+
+        $product->save();
         $request->session()->flash('message', 'Successfully updated user');
-        return redirect()->route('users.index');
+        return redirect()->route('inventory.index');
     }
 
     /**

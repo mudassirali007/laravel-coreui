@@ -23,18 +23,166 @@
                 @endif            
                 <div class="row">
                     <div class="col-6">
-                        <form method="POST" action="{{ route('bread.store') }}">
+                        <form method="POST" action="{{ route('inventory.store') }}">
                             @csrf
                             <input name="marker" value="selectModel" type="hidden">
                             <div class="form-group">
-                                <label>Table name in database</label>
-                                <input 
-                                    type="text"
-                                    placeholder="Table name"
-                                    name="model"
-                                    class="form-control"
+                                <label>Name</label>
+                                <input
+                                        class="form-control"
+                                        name="Name"
+                                        type="text"
+                                        value=""
+                                        placeholder="Product Name"
                                 >
                             </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input
+                                        class="form-control"
+                                        name="Description"
+                                        type="text"
+                                        value=""
+                                        placeholder="Description"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Manufacturer</label>
+                                <input
+                                        class="form-control"
+                                        name="Manufacturer"
+                                        type="text"
+                                        value=""
+                                        placeholder="Manufacturer"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input
+                                        class="form-control"
+                                        name="Location"
+                                        type="text"
+                                        value=""
+                                        placeholder="Location"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input
+                                        class="form-control"
+                                        name="Date"
+                                        type="date"
+                                        value=""
+                                        placeholder="Date"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Model Year</label>
+                                <input
+                                        class="form-control"
+                                        name="ModelYear"
+                                        type="number"
+                                        value=""
+                                        placeholder="Model Year"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Bar Code</label>
+                                <input
+                                        class="form-control"
+                                        name="BarCode"
+                                        type="text"
+                                        value=""
+                                        placeholder="Bar Code"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Part Number</label>
+                                <input
+                                        class="form-control"
+                                        name="PartNumber"
+                                        type="text"
+                                        value=""
+                                        placeholder="Part Number"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Stock Value</label>
+                                <input
+                                        class="form-control"
+                                        name="StockValue"
+                                        type="text"
+                                        value=""
+                                        placeholder="Stock Value"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Units On Hand</label>
+                                <input
+                                        class="form-control"
+                                        name="UnitsOnHand"
+                                        type="text"
+                                        value=""
+                                        placeholder="UnitsOnHand"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Taxable</label>
+                                <input
+                                        class="form-control"
+                                        name="Taxable"
+                                        type="text"
+                                        value=""
+                                        placeholder="Taxable"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Unit Price</label>
+                                <input
+                                        class="form-control"
+                                        name="UnitPrice"
+                                        type="text"
+                                        value=""
+                                        placeholder="Unit Price"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Unit Cost</label>
+                                <input
+                                        class="form-control"
+                                        name="UnitCost"
+                                        type="text"
+                                        value=""
+                                        placeholder="Unit Cost"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Reorder Level</label>
+                                <input
+                                        class="form-control"
+                                        name="ReorderLevel"
+                                        type="text"
+                                        value=""
+                                        placeholder="Reorder Level"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <input
+                                        class="form-control"
+                                        name="Category"
+                                        type="text"
+                                        value=""
+                                        placeholder="Category"
+                                >
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="file-input">Image</label>
+                                <div class="col-md-9">
+                                    <input id="file-input" type="file" name="Image">
+                                </div>
+                            </div>
+
                             <button
                                 type="submit"
                                 class="btn btn-primary"
@@ -42,7 +190,7 @@
                                 Select
                             </button>
                             <a 
-                                href="{{ route('bread.index') }}"
+                                href="{{ route('inventory.index') }}"
                                 class="btn btn-primary"
                             >
                                 Return
