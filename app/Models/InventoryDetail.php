@@ -9,7 +9,6 @@ class InventoryDetail extends FMModel
 {
     protected $connection = 'filemaker';
     protected $layout = "Product Details";
-    protected $primaryKey = 'ProductID';
 
     protected $fillable = [
         'Description',

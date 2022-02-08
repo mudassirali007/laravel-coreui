@@ -23,7 +23,7 @@
                             @endif
                             <div class="row">
                                 <div class="col-6">
-                                    <form method="POST" action="{{ route('inventory.update', $product->ProductID) }}">
+                                    <form method="POST" action="{{ route('inventory.update', $product->getRecordId()) }}">
                                         @csrf
                                         @method('PUT')
                                         <input name="marker" value="selectModel" type="hidden">

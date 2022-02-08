@@ -76,7 +76,8 @@ class InventoryController extends Controller
      */
     public function show($id)
     {
-        $product = InventoryDetail::find($id);
+
+        $product = InventoryDetail::findByRecordId($id);
 //        dd($product);
         return view('dashboard.inventory.inventoryShow', compact( 'product' ));
     }
@@ -89,7 +90,7 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        $product = InventoryDetail::find($id);
+        $product = InventoryDetail::findByRecordId($id);
         return view('dashboard.inventory.edit', compact('product'));
     }
 
@@ -102,7 +103,7 @@ class InventoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = InventoryDetail::find($id);
+        $product = InventoryDetail::findByRecordId($id);
         $product->Name = $request->Name;
         $product->Description = $request->Description;
         $product->Manufacturer = $request->Manufacturer;
@@ -132,7 +133,7 @@ class InventoryController extends Controller
      */
     public function destroy($id)
     {
-        $product = Inventory::find($id);
+        $product = Inventory::findByRecordId($id);
 
         if($product){
             $product->delete();

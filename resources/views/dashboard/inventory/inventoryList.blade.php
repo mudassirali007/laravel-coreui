@@ -47,14 +47,14 @@
                               <td>{{ $product->UnitsOnHand }}</td>
                               <td>{{ $product->Availability }}</td>
                               <td>
-                                <a href="{{ url('/inventory/' . $product->ProductID) }}" class="btn btn-block btn-primary">View</a>
+                                <a href="{{ url('/inventory/' . $product->getRecordId()) }}" class="btn btn-block btn-primary">View</a>
                               </td>
                               <td>
-                                <a href="{{ url('/inventory/' . $product->ProductID . '/edit') }}" class="btn btn-block btn-primary">Edit</a>
+                                <a href="{{ url('/inventory/' . $product->getRecordId() . '/edit') }}" class="btn btn-block btn-primary">Edit</a>
                               </td>
                               <td>
-                                @if( $you->id !== $product->ProductID )
-                                <form action="{{ route('inventory.destroy', $product->ProductID ) }}" method="POST">
+                                @if( $you->id !== $product->getRecordId() )
+                                <form action="{{ route('inventory.destroy', $product->getRecordId() ) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-block btn-danger">Delete</button>
