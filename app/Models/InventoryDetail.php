@@ -9,8 +9,13 @@ class InventoryDetail extends FMModel
 {
     protected $connection = 'filemaker';
     protected $layout = "Product Details";
+    protected $dateFormat = 'Y-n-j'; // 7/1/1920 16:01:01
 
-    protected $fillable = [
+//    protected $casts = [
+//        'Inventory Transactions::Date' => 'date',
+//        'Date' => 'date',
+//    ];
+    /*protected $fillable = [
         'Description',
         'Manufacturer',
         'Location',
@@ -26,7 +31,10 @@ class InventoryDetail extends FMModel
         'ReorderLevel',
         'Category',
         'Name',
-        'Image'
-    ];
+        'Image',
+        'Inventory Transactions'
+    ];*/
+
+
 
 }

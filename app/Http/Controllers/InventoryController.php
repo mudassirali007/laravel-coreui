@@ -91,6 +91,7 @@ class InventoryController extends Controller
     public function edit($id)
     {
         $product = InventoryDetail::findByRecordId($id);
+//        dd($product->Date);
         return view('dashboard.inventory.edit', compact('product'));
     }
 
@@ -120,6 +121,8 @@ class InventoryController extends Controller
         $product->ReorderLevel = $request->ReorderLevel;
         $product->Category = $request->Category;
 
+        $product->{'Inventory Transactions'}[0]['InventoryTransactions::Units'] = 3;
+        dd($product->{'Inventory Transactions'}[0]['InventoryTransactions::Units']);
         $product->save();
         $request->session()->flash('message', 'Successfully updated user');
         return redirect()->route('inventory.index');
