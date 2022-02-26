@@ -121,8 +121,8 @@ class InventoryController extends Controller
         $product->ReorderLevel = $request->ReorderLevel;
         $product->Category = $request->Category;
 
-        $product->{'Inventory Transactions'}[0]['InventoryTransactions::Units'] = 3;
-        dd($product->{'Inventory Transactions'}[0]['InventoryTransactions::Units']);
+//        $product->{'Inventory Transactions'}[0]['InventoryTransactions::Units'] = 3;
+
         $product->save();
         $request->session()->flash('message', 'Successfully updated user');
         return redirect()->route('inventory.index');
