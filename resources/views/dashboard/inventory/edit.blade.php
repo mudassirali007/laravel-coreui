@@ -24,11 +24,11 @@
                             </div>
                         </div>
                         @endif
+                        <form method="POST" action="{{ route('inventory.update', $product->getRecordId()) }}">
+                        @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-6">
-                                <form method="POST" action="{{ route('inventory.update', $product->getRecordId()) }}">
-                                    @csrf
-                                    @method('PUT')
                                     <input name="marker" value="selectModel" type="hidden">
                                     <div class="form-group">
                                         <label>Name</label>
@@ -81,8 +81,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Date</label>
-                                        <input class="form-control" name="Date" type="date" value="{{ date("Y-m-d", strtotime($product->Date)) }}"
-                                            >
+                                        <input class="form-control" name="Date" type="date"
+                                            value="{{ date("Y-m-d", strtotime($product->Date)) }}">
                                     </div>
                                     <div class="form-group">
                                         <label>Model Year</label>
@@ -223,12 +223,11 @@
                                     <a href="{{ route('inventory.index') }}" class="btn btn-primary">
                                         Return
                                     </a>
-                                </form>
+                                
                             </div>
 
 
                             <div class="col-6">
-
                                 <!-- PRODUCT IMAGE -->
                                 <label>
                                     <h5>Product Image</h5>
@@ -237,9 +236,7 @@
                                     style="height:300px; border:1px solid #ced2d8; border-radius:2px; padding:10px; margin:-7px 0px 28px 0px;">
                                     <img alt="Qries"
                                         style="display: block; margin-left: auto; margin-right: auto; max-height:280px; "
-                                        src="{{ $product->Image }}">
-
-
+                                        src="">
                                 </div>
 
                                 <div class="form-group row">
@@ -249,73 +246,111 @@
                                     </div>
                                 </div>
 
-                                <!-- STOCK -->
-                                <label>
-                                    <h5>Stock</h5>
-                                </label>
-                                <div
-                                    style="overflow-y:scroll; overflow-x:hidden;
-                                    height:300px; border:1px solid #ced2d8;
-                                    border-radius:2px; padding:10px 5px 10px 5px;">
-                                    <div class="col-md-2">
-                                        <button class="btn btn-pill btn-block btn-light" type="button"
-                                                style="height:-3px; margin-left:30px;
-                                            font-weight:bold !important; margin-bottom:10px;
-                                            font-size:15px; font-weight:bold; color:#39f; ">+</button>
-                                    </div>
-                                    @foreach($product->{'Inventory Transactions'} as $stock)
-                                        <div class="form-group row">
-                                            <button class="btn btn-sm"
-                                                    style="margin-left:15px; font-weight:bold !important;
-                                            color:red; font-size:15px;"
-                                                    type="text">X</button>
-                                            <div class="col-sm-3">
-                                                <input class="form-control" style="width:110%" type="number"
-                                                       style="background-color:#EBEDEF" value="{{$stock['InventoryTransactions::Units']}}">
+                                <div class="card" style="min-width:500px;">
+                                    <div class="card-header">
+                                    <div class="row">
+                                    <div class="col-sm-2"style="margin-top:7px;">
+                                        <h5>Stock</h5></div>
+                                        <div class="col-sm-2">
+                                                <button class="btn btn-block btn-light" type="button" style="font-weight:bold; color:#39f;margin-left:-10px; ">+</button>
+                                            </div>
                                             </div>
 
-                                            <div class="col-sm-4">
-                                                <select class="form-control" name="" id=""
-                                                        style="background-color:#EBEDEF" >
-                                                    <option value="In" {{ $stock['InventoryTransactions::Type'] == 'In'?'selected': ''  }} >In</option>
-                                                    <option value="Out" {{ $stock['InventoryTransactions::Type'] == 'Out'?'selected': ''  }}>Out</option>
+                                    </div>
+                                    <div class="card-body" style="height:250px; overflow-y:scroll; overflow-x:hidden;">
+
+                                        
+                                       
+                                        <div class="row">
+                                            <div class="form-group col-sm-1"  >
+                                                <button class="btn" style=" font-weight:bold !important;
+                                            color:red; font-size:15px;" type="text">X</button>
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <input class="form-control" type="number" value="">
+                                            </div>
+
+                                            <div class="form-group col-sm-3">
+                                                <select class="form-control" style="background-color:#EBEDEF">
+                                                    <option>In</option>
+                                                    <option>Out</option>
                                                 </select>
                                             </div>
-
-                                            <div class="col-sm-4">
-                                                <input class="form-control" name="Date" type="date" value="{{ date("Y-m-d", strtotime($stock['InventoryTransactions::Date'])) }}"
-                                                       placeholder="Date" >
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <input class="form-control" style="" name="Date" type="date"
+                                                        value="" placeholder="Date">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <input class="form-control" type="number" placeholder="Lot Number"
-                                                       style="margin-left:40px; width:110%;" value="{{$stock['InventoryTransactions::LotNumber'] }}">
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-1"></div>
+                                            <div class="form-group col-sm-3">
+                                                <input class="form-control" type="number" value=""
+                                                    placeholder="Lot no.">
                                             </div>
-                                            <div class="col-sm-8">
-                                            <textarea class="form-control" style="margin-left:40px;" type="text"
-                                                      rows="1" cols="50" placeholder="Description" >{{$stock['InventoryTransactions::Description']}}</textarea>
+                                            <div class="form-group col-sm-8">
+                                                <textarea class="form-control" type="text" rows="1" cols="50"
+                                                    placeholder="Description"></textarea>
                                             </div>
                                         </div>
-                                        <br> <!-- BREAK -->
-                                    @endforeach
-                                </div>
-                                <br>
 
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input class="form-control" type="number" placeholder="Units on Hands">
+                                        <!-- Next line -->
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-1">
+                                                <button class="btn" style=" font-weight:bold !important;
+                                            color:red; font-size:15px;" type="text">X</button>
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <input class="form-control" type="number" value="">
+                                            </div>
+
+                                            <div class="form-group col-sm-3">
+                                                <select class="form-control" style="background-color:#EBEDEF">
+                                                    <option>In</option>
+                                                    <option>Out</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <input class="form-control" style="" name="Date" type="date"
+                                                        value="" placeholder="Date">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-1"></div>
+                                            <div class="form-group col-sm-3">
+                                                <input class="form-control" type="number" value=""
+                                                    placeholder="Lot no.">
+                                            </div>
+                                            <div class="form-group col-sm-8">
+                                                <textarea class="form-control" type="text" rows="1" cols="50"
+                                                    placeholder="Description"></textarea>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input class="form-control" type="text" rows="1" cols="50"
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <input class="form-control" type="number" value="" placeholder="Units On Hand">
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <input class="form-control" type="number" value=""
                                             placeholder="Reordered Level">
                                     </div>
+
                                 </div>
 
                             </div>
-
-
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
