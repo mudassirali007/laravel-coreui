@@ -26,12 +26,13 @@
                         <table class="table table-responsive-sm table-striped">
                         <thead>
                           <tr>
+                            <th>ID</th>
                             <th>Image</th>
                             <th>Name</th>
                             <th>Part Number</th>
                             <th>Units On Hand</th>
                             <th>Availability</th>
-                            <th></th>
+{{--                            <th></th>--}}
                             <th></th>
                             <th></th>
                           </tr>
@@ -39,6 +40,7 @@
                         <tbody>
                           @foreach($products as $product)
                             <tr>
+                              <td>{{ $product->id }}</td>
                               <td>
                                   <img width="50vw" src="{{ $product->Image  }}" />
                               </td>
@@ -46,15 +48,15 @@
                               <td>{{ $product->PartNumber }}</td>
                               <td>{{ $product->UnitsOnHand }}</td>
                               <td>{{ $product->Availability }}</td>
+{{--                              <td>--}}
+{{--                                <a href="{{ url('/inventory/' . $product->id) }}" class="btn btn-block btn-primary">View</a>--}}
+{{--                              </td>--}}
                               <td>
-                                <a href="{{ url('/inventory/' . $product->getRecordId()) }}" class="btn btn-block btn-primary">View</a>
+                                <a href="{{ url('/inventory/' . $product->id . '/edit') }}" class="btn btn-block btn-primary">Edit</a>
                               </td>
                               <td>
-                                <a href="{{ url('/inventory/' . $product->getRecordId() . '/edit') }}" class="btn btn-block btn-primary">Edit</a>
-                              </td>
-                              <td>
-                                @if( $you->id !== $product->getRecordId() )
-                                <form action="{{ route('inventory.destroy', $product->getRecordId() ) }}" method="POST">
+                                @if( $you->id !== $product->id )
+                                <form action="{{ route('inventory.destroy', $product->id ) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-block btn-danger">Delete</button>

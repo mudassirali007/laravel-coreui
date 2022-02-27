@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         @endif
-                        <form method="POST" action="{{ route('inventory.store') }}">
+                        <form method="POST" action="{{ route('inventory.store') }}"  enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-6">
@@ -31,51 +31,40 @@
                                 <div class="form-group">
                                     <label>Name</label>
                                     <input class="form-control" name="Name" type="text" value=""
-                                        placeholder="Product Name">
+                                        >
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
                                     <input class="form-control" name="Description" type="text" value=""
-                                        placeholder="Description">
+                                       >
                                 </div>
                                 <div class="form-group">
                                     <label>Manufacturer</label>
-                                    <!--
-                                <input
-                                        class="form-control"
-                                        name="Manufacturer"
-                                        type="text"
-                                        value=""
-                                        placeholder="Manufacturer"
-                                > -->
-                                    <select class="form-control" name="Manufacturer" id="manufacturer">
+                                    <input class="form-control" name="Manufacturer" type="text"
+                                    >
+                                    {{--<select class="form-control" name="Manufacturer" id="manufacturer">
                                         <option value="" disabled selected hidden>Manufacturer</option>
                                         <option value="Albania">Albania</option>
                                         <option value="Algeria">Algeria</option>
                                         <option value="Bahrain">Bahrain</option>
                                         <option value="Bangladesh">Bangladesh</option>
-                                    </select>
+                                    </select>--}}
                                 </div>
                                 <div class="form-group">
                                     <label>Location</label>
-                                    <!-- <input
-                                        class="form-control"
-                                        name="Location"
-                                        type="text"
-                                        value=""
-                                        placeholder="Location"
-                                > -->
-                                    <select class="form-control" name="Location" id="location">
+                                    <input class="form-control" name="Location" type="text"
+                                           >
+                                    {{--<select class="form-control" name="Location" id="location">
                                         <option value="" disabled selected hidden>Location</option>
                                         <option value="Albania">Albania</option>
                                         <option value="Algeria">Algeria</option>
                                         <option value="Bahrain">Bahrain</option>
                                         <option value="Bangladesh">Bangladesh</option>
-                                    </select>
+                                    </select>--}}
                                 </div>
                                 <div class="form-group">
                                     <label>Date</label>
-                                    <input class="form-control" name="Date" type="date" value="" placeholder="Date">
+                                    <input class="form-control" name="Date" type="date" value="" >
                                 </div>
                                 <div class="form-group">
                                     <label>Model Year</label>
@@ -85,91 +74,32 @@
                                 <div class="form-group">
                                     <label>Bar Code</label>
                                     <input class="form-control" name="BarCode" type="text" value=""
-                                        placeholder="Bar Code">
+                                        >
                                 </div>
                                 <div class="form-group">
                                     <label>Part Number</label>
                                     <input class="form-control" name="PartNumber" type="text" value=""
-                                        placeholder="Part Number">
+                                     >
                                 </div>
-                                <!-- <div class="form-group">
-                                <label>Stock Value</label>
-                                <input
-                                        class="form-control"
-                                        name="StockValue"
-                                        type="text"
-                                        value=""
-                                        placeholder="Stock Value"
-                                >
-                             </div>
-                             <div class="form-group">
-                                <label>Units On Hand</label>
-                                <input
-                                        class="form-control"
-                                        name="UnitsOnHand"
-                                        type="text"
-                                        value=""
-                                        placeholder="UnitsOnHand"
-                                >
-                              </div>
-                             <div class="form-group">
-                                <label>Taxable</label>
-                                <input
-                                        class="form-control"
-                                        name="Taxable"
-                                        type="text"
-                                        value=""
-                                        placeholder="Taxable"
-                                >
-                             </div>
-                             <div class="form-group">
-                                <label>Unit Price</label>
-                                <input
-                                        class="form-control"
-                                        name="UnitPrice"
-                                        type="text"
-                                        value=""
-                                        placeholder="Unit Price"
-                                >
-                             </div>
-                             <div class="form-group">
-                                <label>Unit Cost</label>
-                                <input
-                                        class="form-control"
-                                        name="UnitCost"
-                                        type="text"
-                                        value=""
-                                        placeholder="Unit Cost"
-                                >
-                             </div> -->
+
                                 <div class="form-group">
                                     <label>Reorder Level</label>
                                     <input class="form-control" name="ReorderLevel" type="text" value=""
-                                        placeholder="Reorder Level">
+                                        >
                                 </div>
                                 <div class="form-group">
                                     <label>Category</label>
-                                    <!-- <input
-                                        class="form-control"
-                                        name="Category"
-                                        type="text"
-                                        value=""
-                                        placeholder="Category"
-                                > -->
-                                    <select class="form-control" name="Category" id="category">
+                                    <input class="form-control" name="Category" type="text" value=""
+                                    >
+                                    {{--<select class="form-control" name="Category" id="category">
                                         <option value="" disabled selected hidden>Category</option>
                                         <option value="Albania">Albania</option>
                                         <option value="Algeria">Algeria</option>
                                         <option value="Bahrain">Bahrain</option>
                                         <option value="Bangladesh">Bangladesh</option>
-                                    </select>
+                                    </select>--}}
                                 </div>
-                                <!-- <div class="form-group row">
-                                 <label class="col-md-3 col-form-label" for="file-input">Image</label>
-                                <div class="col-md-9">
-                                    <input id="file-input" type="file" name="Image">
-                                </div> 
-                             </div> -->
+
                                 <!-- COST -->
                                 <label style="margin-top:20px;">
                                     <h5>Cost</h5>
@@ -180,24 +110,15 @@
                                     <div class="form-group row">
                                         <div class="col-sm-6">
                                             <label>Unit Cost</label>
-                                            <input class="form-control" type="number" value="" placeholder="Unit Cost">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Units On Hand</label>
-                                            <input class="form-control" type="number" value=""
-                                                placeholder="Units On Hand">
+                                            <input class="form-control" type="number" value="" name="UnitCost">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6">
                                             <label>Unit Price</label>
-                                            <input class="form-control" type="number" value="" placeholder="Unit Price">
+                                            <input class="form-control" type="number" value="" name="UnitPrice">
                                         </div>
-                                        <div class="col-sm-6">
-                                            <label>Stock Value</label>
-                                            <input class="form-control" type="number" value=""
-                                                placeholder="Stock Value">
-                                        </div>
+
                                     </div>
                                     <div class="form-group">
                                         <input type="checkbox" style="width: 13px; height:13px; vertical-align:middle;"
@@ -216,15 +137,15 @@
                             </div>
                             <div class="col-6">
                                 <!-- PRODUCT IMAGE -->
-                                <label>
+                               {{-- <label>
                                     <h5>Product Image</h5>
                                 </label>
                                 <div
                                     style="height:300px; border:1px solid #ced2d8; border-radius:2px; padding:10px; margin:-7px 0px 28px 0px;">
-                                    <img alt="Qries"
+                                    <img alt="Image"
                                         style="display: block; margin-left: auto; margin-right: auto; max-height:280px; "
                                         src="">
-                                </div>
+                                </div>--}}
 
                                 <div class="form-group row">
                                     <div class="col-md-12">
@@ -233,7 +154,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card" style="min-width:500px;">
+                                <div class="card" style="min-width:500px; display: none">
                                     <div class="card-header">
                                     <div class="row">
                                     <div class="col-sm-2"style="margin-top:7px;">
@@ -324,7 +245,7 @@
 
 
                                 </div>
-                                <div class="row">
+                                <div class="row" style="display: none;">
                                     <div class="form-group col-sm-6">
                                         <input class="form-control" type="number" value="" placeholder="Units On Hand">
                                     </div>

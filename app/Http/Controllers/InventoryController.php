@@ -6,6 +6,8 @@ use App\Models\Inventory;
 use App\Models\InventoryDetail;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class InventoryController extends Controller
 {
@@ -30,7 +32,7 @@ class InventoryController extends Controller
     {
 
         $you = auth()->user();
-        $products = Inventory::all();
+        $products = Inventory::all()->sortByDesc("id");
 //        dd($products);
         return view('dashboard.inventory.inventoryList', compact('products', 'you'));
     }
@@ -42,27 +44,7 @@ class InventoryController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->Date);
-        $product = new InventoryDetail();
-        $product->Name = $request->Name;
-        $product->Description = $request->Description;
-        $product->Manufacturer = $request->Manufacturer;
-        $product->Location = $request->Location;
-
-        $product->ModelYear = $request->ModelYear;
-        $product->BarCode = $request->BarCode;
-        $product->PartNumber = $request->PartNumber;
-//        $product->StockValue = $request->StockValue;
-//        $product->UnitsOnHand = $request->UnitsOnHand;
-        $product->Taxable = $request->Taxable;
-        $product->UnitPrice = $request->UnitPrice;
-        $product->UnitCost = $request->UnitCost;
-        $product->ReorderLevel = $request->ReorderLevel;
-        $product->Category = $request->Category;
-
-        $product->save();
-//        InventoryDetail::create($request->all());
-
+        $this->save(new InventoryDetail(),$request);
         return redirect()->route('inventory.index');
 
     }
@@ -76,9 +58,7 @@ class InventoryController extends Controller
      */
     public function show($id)
     {
-
-        $product = InventoryDetail::findByRecordId($id);
-//        dd($product);
+        $product = InventoryDetail::find($id);
         return view('dashboard.inventory.inventoryShow', compact( 'product' ));
     }
 
@@ -90,8 +70,7 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        $product = InventoryDetail::findByRecordId($id);
-//        dd($product->Date);
+        $product = InventoryDetail::find($id);
         return view('dashboard.inventory.edit', compact('product'));
     }
 
@@ -104,27 +83,8 @@ class InventoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = InventoryDetail::findByRecordId($id);
-        $product->Name = $request->Name;
-        $product->Description = $request->Description;
-        $product->Manufacturer = $request->Manufacturer;
-        $product->Location = $request->Location;
-
-        $product->ModelYear = $request->ModelYear;
-        $product->BarCode = $request->BarCode;
-        $product->PartNumber = $request->PartNumber;
-//        $product->StockValue = $request->StockValue;
-//        $product->UnitsOnHand = $request->UnitsOnHand;
-        $product->Taxable = $request->Taxable;
-        $product->UnitPrice = $request->UnitPrice;
-        $product->UnitCost = $request->UnitCost;
-        $product->ReorderLevel = $request->ReorderLevel;
-        $product->Category = $request->Category;
-
-//        $product->{'Inventory Transactions'}[0]['InventoryTransactions::Units'] = 3;
-
-        $product->save();
-        $request->session()->flash('message', 'Successfully updated user');
+        $this->save(InventoryDetail::find($id),$request);
+        $request->session()->flash('message', 'Successfully updated record');
         return redirect()->route('inventory.index');
     }
 
@@ -136,11 +96,36 @@ class InventoryController extends Controller
      */
     public function destroy($id)
     {
-        $product = Inventory::findByRecordId($id);
+        $product = Inventory::find($id);
 
         if($product){
             $product->delete();
         }
         return redirect()->route('inventory.index');
+    }
+
+    private function save($product,$request){
+        $product->Name = $request->Name;
+        if($request->Image){
+            $imageName = time().'.'.$request->Image->extension();
+            $request->Image->storeAs('public/images', $imageName);
+//            $product->Image = new File($request->Image);
+            $product->Image = new File(storage_path('app/public/images/'.$imageName));
+        }
+        $product->Description = $request->Description;
+        $product->Manufacturer = $request->Manufacturer;
+        $product->Category = $request->Category;
+        $product->Location = $request->Location;
+        $product->ModelYear = $request->ModelYear;
+        $product->BarCode = $request->BarCode;
+        $product->PartNumber = $request->PartNumber;
+//        $product->StockValue = $request->StockValue;
+//        $product->UnitsOnHand = $request->UnitsOnHand;
+        $product->Taxable = $request->Taxable == 'on'? 'Taxable' : '';
+        $product->UnitPrice = $request->UnitPrice;
+        $product->UnitCost = $request->UnitCost;
+        $product->ReorderLevel = $request->ReorderLevel;
+
+        $product->save();
     }
 }

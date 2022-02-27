@@ -9,12 +9,15 @@ class InventoryDetail extends FMModel
 {
     protected $connection = 'filemaker';
     protected $layout = "Product Details";
-    protected $dateFormat = 'Y-n-j'; // 7/1/1920 16:01:01
+    protected $primaryKey = "id";
+    protected $dateFormat = 'Y-n-j'; // year/month/day
+    protected $fieldMapping = [
+        'Inventory Transactions' => 'inventory_transactions'
+    ];
 
-//    protected $casts = [
-//        'Inventory Transactions::Date' => 'date',
-//        'Date' => 'date',
-//    ];
+    protected $casts = [
+        'Date' => 'date'
+    ];
     /*protected $fillable = [
         'Description',
         'Manufacturer',
