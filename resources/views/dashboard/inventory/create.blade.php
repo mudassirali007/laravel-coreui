@@ -186,7 +186,7 @@
                                             </div>
                                             <div class="col-sm-5">
                                                 <div class="form-group">
-                                                    <input class="form-control" style="" name="Date" type="date"
+                                                    <input class="form-control" style="" name="Date1" type="date"
                                                         value="" placeholder="Date">
                                                 </div>
                                             </div>
@@ -223,7 +223,7 @@
                                             </div>
                                             <div class="col-sm-5">
                                                 <div class="form-group">
-                                                    <input class="form-control" style="" name="Date" type="date"
+                                                    <input class="form-control" style="" name="Date2" type="date"
                                                         value="" placeholder="Date">
                                                 </div>
                                             </div>

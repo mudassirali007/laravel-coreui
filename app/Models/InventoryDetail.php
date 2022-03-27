@@ -12,9 +12,8 @@ class InventoryDetail extends FMModel
     protected $primaryKey = "id";
     protected $dateFormat = 'Y-n-j'; // year/month/day
     protected $fieldMapping = [
-        'Inventory Transactions' => 'inventory_transactions'
+        'Inventory Transactions' => 'InventoryTransactions'
     ];
-
     protected $casts = [
         'Date' => 'date'
     ];

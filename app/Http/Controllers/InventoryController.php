@@ -70,7 +70,11 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
+
         $product = InventoryDetail::find($id);
+//        $product->{'Inventory Transactions'}[0]['InventoryTransactions::Units'] = 3;
+//        $product->save();
+        dd($product->{'Inventory Transactions'});
         return view('dashboard.inventory.edit', compact('product'));
     }
 
@@ -119,6 +123,8 @@ class InventoryController extends Controller
         $product->ModelYear = $request->ModelYear;
         $product->BarCode = $request->BarCode;
         $product->PartNumber = $request->PartNumber;
+//        $product->Date = date('Y-m-d', strtotime($request->Date));
+
 //        $product->StockValue = $request->StockValue;
 //        $product->UnitsOnHand = $request->UnitsOnHand;
         $product->Taxable = $request->Taxable == 'on'? 'Taxable' : '';
