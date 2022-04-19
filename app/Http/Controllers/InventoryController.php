@@ -74,7 +74,7 @@ class InventoryController extends Controller
         $product = InventoryDetail::find($id);
 //        $product->{'Inventory Transactions'}[0]['InventoryTransactions::Units'] = 3;
 //        $product->save();
-//        dd($product);
+        dd($product);
         return view('dashboard.inventory.edit', compact('product'));
     }
 
@@ -135,16 +135,26 @@ class InventoryController extends Controller
         $product->ReorderLevel = $request->ReorderLevel;
 //        $product->{'Inventory Transactions'}[0][0]['InventoryTransactions::Units'] = 5;
 
-        $tempVariable = $product->InventoryTransactions;
+//        $tempVariable = $product->InventoryTransactions;
+//        if(!$tempVariable){
+//            $tempVariable = array();
+//        }
+//        dd($tempVariable);
+        $tempVariable = array();
         $tempVariable[0]['InventoryTransactions::Units'] = 5;
         $tempVariable[0]['InventoryTransactions::Type'] = 'In';
         $tempVariable[0]['InventoryTransactions::Description'] = '';
         $tempVariable[0]['InventoryTransactions::LotNumber'] = '3';
         $tempVariable[0]['InventoryTransactions::Date'] = '04-04-2030';
+//        $tempVariable[1]['InventoryTransactions::Units'] = 5;
+//        $tempVariable[1]['InventoryTransactions::Type'] = 'In';
+//        $tempVariable[1]['InventoryTransactions::Description'] = '';
+//        $tempVariable[1]['InventoryTransactions::LotNumber'] = '3';
+//        $tempVariable[1]['InventoryTransactions::Date'] = '04-04-2030';
 
         $product->InventoryTransactions = $tempVariable;
+        dd($product);
 
-//        dd($product);
         $product->save();
     }
 }
