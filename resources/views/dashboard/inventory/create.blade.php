@@ -154,107 +154,56 @@
                                     </div>
                                 </div>
 
-                                <div class="card" style="min-width:500px; display: none">
+                                <div class="card" style="min-width:500px; display: block">
                                     <div class="card-header">
-                                    <div class="row">
-                                    <div class="col-sm-2"style="margin-top:7px;">
-                                        <h5>Stock</h5></div>
-                                        <div class="col-sm-2">
-                                                <button class="btn btn-block btn-light" type="button" style=" font-weight:bold; color:#39f;margin-left:-10px;">+</button>
+                                        <div class="row">
+                                            <div class="col-sm-2"style="margin-top:7px;">
+                                                <h5>Stock</h5>
                                             </div>
+                                            <div class="col-sm-2">
+                                                <button id="add-stock-button" class="btn btn-block btn-light" type="button" style=" font-weight:bold; color:#39f;margin-left:-10px;">+</button>
                                             </div>
-
+                                        </div>
                                     </div>
-                                    <div class="card-body" style="height:250px; overflow-y:scroll; overflow-x:hidden;">
+                                    <div id="stock-card-body" class="card-body" >
+{{--                                        <div class="stock-section">--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="form-group col-sm-1"  >--}}
+{{--                                                    <button class="btn crossButton" style=" font-weight:bold !important;--}}
+{{--                                            color:red; font-size:15px;" type="text">X</button>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="form-group col-sm-3">--}}
+{{--                                                    <input  name="InventoryTransactions[0][InventoryTransactions::Units]" class="form-control" type="number" value="">--}}
+{{--                                                </div>--}}
 
-                                        
-                                       
-                                        <div class="row">
-                                            <div class="form-group col-sm-1"  >
-                                                <button class="btn" style=" font-weight:bold !important;
-                                            color:red; font-size:15px;" type="text">X</button>
-                                            </div>
-                                            <div class="form-group col-sm-3">
-                                                <input class="form-control" type="number" value="">
-                                            </div>
-
-                                            <div class="form-group col-sm-3">
-                                                <select class="form-control" style="background-color:#EBEDEF">
-                                                    <option>In</option>
-                                                    <option>Out</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <div class="form-group">
-                                                    <input class="form-control" style="" name="Date1" type="date"
-                                                        value="" placeholder="Date">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group col-sm-1"></div>
-                                            <div class="form-group col-sm-3">
-                                                <input class="form-control" type="number" value=""
-                                                    placeholder="Lot no.">
-                                            </div>
-                                            <div class="form-group col-sm-8">
-                                                <textarea class="form-control" type="text" rows="1" cols="50"
-                                                    placeholder="Description"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <!-- Next line -->
-
-                                        <div class="row">
-                                            <div class="form-group col-sm-1">
-                                                <button class="btn" style=" font-weight:bold !important;
-                                            color:red; font-size:15px;" type="text">X</button>
-                                            </div>
-                                            <div class="form-group col-sm-3">
-                                                <input class="form-control" type="number" value="">
-                                            </div>
-
-                                            <div class="form-group col-sm-3">
-                                                <select class="form-control" style="background-color:#EBEDEF">
-                                                    <option>In</option>
-                                                    <option>Out</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <div class="form-group">
-                                                    <input class="form-control" style="" name="Date2" type="date"
-                                                        value="" placeholder="Date">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group col-sm-1"></div>
-                                            <div class="form-group col-sm-3">
-                                                <input class="form-control" type="number" value=""
-                                                    placeholder="Lot no.">
-                                            </div>
-                                            <div class="form-group col-sm-8">
-                                                <textarea class="form-control" type="text" rows="1" cols="50"
-                                                    placeholder="Description"></textarea>
-                                            </div>
-                                        </div>
-
+{{--                                                <div class="form-group col-sm-3">--}}
+{{--                                                    <select name="InventoryTransactions[0][InventoryTransactions::Type]" class="form-control" style="background-color:#EBEDEF">--}}
+{{--                                                        <option value="In">In</option>--}}
+{{--                                                        <option value="Out">Out</option>--}}
+{{--                                                    </select>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="col-sm-5">--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <input name="InventoryTransactions[0][InventoryTransactions::Date]" class="form-control" style="" name="Date1" type="date"--}}
+{{--                                                               value="" placeholder="Date">--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="form-group col-sm-1"></div>--}}
+{{--                                                <div class="form-group col-sm-3">--}}
+{{--                                                    <input name="InventoryTransactions[0][InventoryTransactions::LotNumber]" class="form-control" type="number" value=""--}}
+{{--                                                           placeholder="Lot no.">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="form-group col-sm-8">--}}
+{{--                                                <textarea name="InventoryTransactions[0][InventoryTransactions::Description]" class="form-control" type="text" rows="1" cols="50"--}}
+{{--                                                          placeholder="Description"></textarea>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                     </div>
-
-
                                 </div>
-                                <div class="row" style="display: none;">
-                                    <div class="form-group col-sm-6">
-                                        <input class="form-control" type="number" value="" placeholder="Units On Hand">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <input class="form-control" type="number" value=""
-                                            placeholder="Reordered Level">
-                                    </div>
 
-                                </div>
 
                             </div>
                         </div>
@@ -270,6 +219,71 @@
 @endsection
 
 @section('javascript')
+    <script>
+        // const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const addStockButton = document.getElementById("add-stock-button");
+        const crossButton = document.querySelectorAll(".crossButton");
 
+        addStockButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            addStockElement();
+        });
+
+        crossButton.forEach(item => {
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                e.target.closest(".stock-section").remove();
+            })
+        })
+
+
+        const addStockElement = () => {
+            const value = document.querySelectorAll('.stock-section').length;
+            const html = `<div class="stock-section">
+                                            <div class="row">
+                                                <div class="form-group col-sm-1"  >
+                                                    <button class="btn crossButton" style=" font-weight:bold !important;
+                                            color:red; font-size:15px;" type="text">X</button>
+                                                </div>
+                                                <div class="form-group col-sm-3">
+                                                    <input  name="InventoryTransactions[${value}][InventoryTransactions::Units]" class="form-control" type="number" value="">
+                                                </div>
+
+                                                <div class="form-group col-sm-3">
+                                                    <select name="InventoryTransactions[${value}][InventoryTransactions::Type]" class="form-control" style="background-color:#EBEDEF">
+                                                        <option value="In">In</option>
+                                                        <option value="Out">Out</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <div class="form-group">
+                                                        <input name="InventoryTransactions[${value}][InventoryTransactions::Date]" class="form-control" style="" name="Date1" type="date"
+                                                               value="${new Date().toISOString().substring(0, 10)}" placeholder="Date">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-sm-1"></div>
+                                                <div class="form-group col-sm-3">
+                                                    <input name="InventoryTransactions[${value}][InventoryTransactions::LotNumber]" class="form-control" type="number" value=""
+                                                           placeholder="Lot no.">
+                                                </div>
+                                                <div class="form-group col-sm-8">
+                                                <textarea name="InventoryTransactions[${value}][InventoryTransactions::Description]" class="form-control" type="text" rows="1" cols="50"
+                                                          placeholder="Description"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>`;
+            appendHtml(document.getElementById('stock-card-body'),html)
+        }
+        const appendHtml = (el, str) => {
+            const div = document.createElement('div');
+            div.innerHTML = str;
+            while (div.children.length > 0) {
+                el.appendChild(div.children[0]);
+            }
+        }
+
+    </script>
 
 @endsection

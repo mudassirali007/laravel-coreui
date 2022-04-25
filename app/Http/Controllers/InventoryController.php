@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventory;
 use App\Models\InventoryDetail;
+use App\Models\InventoryTransaction;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Http\File;
@@ -44,6 +45,7 @@ class InventoryController extends Controller
 
     public function store(Request $request)
     {
+
         $this->save(new InventoryDetail(),$request);
         return redirect()->route('inventory.index');
 
@@ -74,7 +76,7 @@ class InventoryController extends Controller
         $product = InventoryDetail::find($id);
 //        $product->{'Inventory Transactions'}[0]['InventoryTransactions::Units'] = 3;
 //        $product->save();
-        dd($product);
+//        dd($product->InventoryTransactions);
         return view('dashboard.inventory.edit', compact('product'));
     }
 
@@ -110,6 +112,7 @@ class InventoryController extends Controller
 
     private function save($product,$request){
         $product->Name = $request->Name;
+
         if($request->Image){
             $imageName = time().'.'.$request->Image->extension();
             $request->Image->storeAs('public/images', $imageName);
@@ -133,28 +136,35 @@ class InventoryController extends Controller
         $product->UnitPrice = $request->UnitPrice;
         $product->UnitCost = $request->UnitCost;
         $product->ReorderLevel = $request->ReorderLevel;
-//        $product->{'Inventory Transactions'}[0][0]['InventoryTransactions::Units'] = 5;
 
-//        $tempVariable = $product->InventoryTransactions;
-//        if(!$tempVariable){
-//            $tempVariable = array();
-//        }
-//        dd($tempVariable);
-        $tempVariable = array();
-        $tempVariable[0]['InventoryTransactions::Units'] = 5;
-        $tempVariable[0]['InventoryTransactions::Type'] = 'In';
-        $tempVariable[0]['InventoryTransactions::Description'] = '';
-        $tempVariable[0]['InventoryTransactions::LotNumber'] = '3';
-        $tempVariable[0]['InventoryTransactions::Date'] = '04-04-2030';
-//        $tempVariable[1]['InventoryTransactions::Units'] = 5;
-//        $tempVariable[1]['InventoryTransactions::Type'] = 'In';
-//        $tempVariable[1]['InventoryTransactions::Description'] = '';
-//        $tempVariable[1]['InventoryTransactions::LotNumber'] = '3';
-//        $tempVariable[1]['InventoryTransactions::Date'] = '04-04-2030';
 
-        $product->InventoryTransactions = $tempVariable;
-        dd($product);
+        if($request->InventoryTransactions){
+            $tempArray = array();
+
+            foreach ($request->InventoryTransactions as $key=>$it){
+                if(isset($it['recordId'])) $tempArray[$key]['recordId'] = $it['recordId'];
+                if($it['InventoryTransactions::Units']) $tempArray[$key]['InventoryTransactions::Units'] = $it['InventoryTransactions::Units'];
+                if($it['InventoryTransactions::Type']) $tempArray[$key]['InventoryTransactions::Type'] = $it['InventoryTransactions::Type'];
+                if($it['InventoryTransactions::Date']) $tempArray[$key]['InventoryTransactions::Date'] = date('m-d-Y', strtotime($it['InventoryTransactions::Date']));
+                if($it['InventoryTransactions::LotNumber']) $tempArray[$key]['InventoryTransactions::LotNumber'] = $it['InventoryTransactions::LotNumber'];
+                if($it['InventoryTransactions::Description']) $tempArray[$key]['InventoryTransactions::Description'] = $it['InventoryTransactions::Description'];
+            }
+            $product->{'Inventory Transactions'} = $tempArray;
+        }
+
+//        dd($product);
 
         $product->save();
+
+        if($request->deletedRows){
+            $dv = json_decode($request->deletedRows);
+            foreach ($dv as $d){
+                $it = InventoryTransaction::findByRecordId($d);
+                if($it){
+                    $it->delete();
+                }
+            }
+        }
+
     }
 }

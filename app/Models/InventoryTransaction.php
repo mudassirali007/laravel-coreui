@@ -9,12 +9,12 @@ class InventoryTransaction extends FMModel
 {
     protected $connection = 'filemaker';
     protected $layout = "InventoryTransactions";
-    protected $primaryKey = "id";
-    protected $dateFormat = 'Y-n-j'; // year/month/day
-
-    protected $casts = [
-        'Date' => 'date'
-    ];
+//    protected $primaryKey = "id";
+//    protected $dateFormat = 'Y-n-j'; // year/month/day
+//
+//    protected $casts = [
+//        'Date' => 'date'
+//    ];
 
 
 

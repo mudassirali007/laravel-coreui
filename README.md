@@ -1,4 +1,57 @@
+#Important 
+
+edit function createRecord() in vendor/bluefeather/eloquent-filemaker/src/Database/Eloquent/FMEloquentBuilder.php after  $fieldsToWrite = $this->model->getAttributesForFileMakerWrite();
+        
+        $modifiedPortals = null;
+        foreach($fieldsToWrite as $key => $value) {
+            // Check if the field is a portal (it should be an array if it is)
+            if (is_array($value)) {
+                $modifiedPortals[$key] = $fieldsToWrite[$key];
+                $fieldsToWrite->forget($key);
+            }
+        }
+
+        // we always need to create the record, even if there are no regular or portal fields which have been set
+        // forward this request to a base query builder to execute the create record request
+        $response = $this->query->fieldData($fieldsToWrite->toArray())->portalData($modifiedPortals)->createRecord();
+
+and changed in getOnlyModifiedPortalFields()
+
+    protected function getOnlyModifiedPortalFields($array1, $array2): array
+    {
+        $result = [];
+
+        foreach($array1 as $key => $val) {
+
+            if(isset($array2[$key]) && $array2[$key] != $val){
+                // go recursive if we're comparing two arrays
+                if(is_array($val)  && is_array($array2[$key])){
+
+                    $result[$key] = $this->getOnlyModifiedPortalFields($val, $array2[$key]);
+                } else{
+                    // These are normal values, so compare directly
+                    $result[$key] = $val;
+                    // at least one field is modified, so also set the recordID if it isn't set yet
+                    //if(!isset($result['recordId']) && isset($array1['recordId'])){
+                    if(!isset($result['recordId']) && isset($array1['recordId'])){
+                        $result['recordId'] = $array1['recordId'];
+                    }
+                }
+                } else {
+                // The values are equal
+                $result[$key] = $val;
+
+            }
+
+
+        }
+
+        return $result;
+    }
+
+
 # CoreUI Free Laravel Bootstrap Admin Template [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?text=CoreUI%20-%20Free%20Bootstrap%204%20Admin%20Template%20&url=https://coreui.io&hashtags=bootstrap,admin,template,dashboard,panel,free,angular,react,vue)
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

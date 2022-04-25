@@ -37,6 +37,10 @@ class InventoryDetail extends FMModel
         'Inventory Transactions'
     ];*/
 
+//    public function inventoryTransaction(){
+//        $this->hasMany('InventoryTransaction');
+//    }
+
 
 
 }
